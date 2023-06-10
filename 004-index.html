@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+</head>
+
+<body>
+
+    <script>
+        let mobilenet;
+        let video;
+
+        function modelReady() {
+            console.log('Model is ready')
+            mobilenet.predict(gotResults);
+        }
+
+        function gotResults(err, results) {
+            if (err) {
+                console.error(err)
+            }
+            mobilenet.predict(gotResults);
+            // console.log(results)
+        }
+
+        // function imageReady() {
+        //     image(puffin, 0, 0, width, height);
+        // }
+
+        function setup() {
+            createCanvas(640, 480);
+            // puffin = createImg('puffin.png', imageReady)
+            video = createCapture(VIDEO)
+            video.hide()
+            // video.size(320, 240);
+            // puffin.hide();
+            background(0)
+
+            mobilenet = ml5.imageClassifier('MobileNet', video, modelReady);
+        }
+
+        function draw() {
+            background(255);
+            image(video, 0, 0);
+        }
+    </script>
+</body>
+
+</html>
