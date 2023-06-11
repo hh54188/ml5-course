@@ -22,20 +22,12 @@
                 console.error(err)
             }
             mobilenet.predict(gotResults);
-            // console.log(results)
         }
-
-        // function imageReady() {
-        //     image(puffin, 0, 0, width, height);
-        // }
 
         function setup() {
             createCanvas(640, 480);
-            // puffin = createImg('puffin.png', imageReady)
             video = createCapture(VIDEO)
             video.hide()
-            // video.size(320, 240);
-            // puffin.hide();
             background(0)
 
             mobilenet = ml5.imageClassifier('MobileNet', video, modelReady);
